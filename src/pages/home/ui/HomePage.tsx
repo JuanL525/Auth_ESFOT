@@ -4,7 +4,7 @@ import {
 } from "react-native";
 import { useSession } from "@/features/session/model/useSession";
 import { Button }     from "@/shared/ui/Button";
-import { theme }      from "@/app/styles/theme";
+import { theme }      from "@/core/styles/theme";
  
 export const HomePage = () => {
   const { user, signOut } = useSession();

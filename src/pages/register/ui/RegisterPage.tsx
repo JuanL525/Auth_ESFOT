@@ -7,7 +7,7 @@ import { router }       from "expo-router";
 import { useRegister }  from "@/features/auth/model/useRegister";
 import { Input }        from "@/shared/ui/Input";
 import { Button }       from "@/shared/ui/Button";
-import { theme }        from "@/app/styles/theme";
+import { theme }        from "@/core/styles/theme";
  
 export const RegisterPage = () => {
   const [email,    setEmail]    = useState("");

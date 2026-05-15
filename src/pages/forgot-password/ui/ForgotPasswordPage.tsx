@@ -7,7 +7,7 @@ import { router, Href }            from "expo-router";
 import { useForgotPassword } from "@/features/auth/model/useForgotPassword";
 import { Input }             from "@/shared/ui/Input";
 import { Button }            from "@/shared/ui/Button";
-import { theme }             from "@/app/styles/theme";
+import { theme }             from "@/core/styles/theme";
  
 export const ForgotPasswordPage = () => {
   const [email,   setEmail]   = useState("");
