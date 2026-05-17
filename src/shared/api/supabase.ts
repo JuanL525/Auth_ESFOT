@@ -1,9 +1,9 @@
 import { createClient } from "@supabase/supabase-js";
 import * as SecureStore from "expo-secure-store";
- 
-const supabaseUrl     = process.env.EXPO_PUBLIC_SUPABASE_URL!;
+
+const supabaseUrl = process.env.EXPO_PUBLIC_SUPABASE_URL!;
 const supabaseAnonKey = process.env.EXPO_PUBLIC_SUPABASE_ANON_KEY!;
- 
+
 /**
  * Adaptador que conecta el sistema de storage de Supabase Auth
  * con SecureStore de Expo (encriptado con el KeyStore de Android).
@@ -12,19 +12,23 @@ const supabaseAnonKey = process.env.EXPO_PUBLIC_SUPABASE_ANON_KEY!;
 const SecureStoreAdapter = {
   getItem: (key: string): Promise<string | null> =>
     SecureStore.getItemAsync(key),
- 
+
   setItem: (key: string, value: string): Promise<void> =>
     SecureStore.setItemAsync(key, value),
- 
-  removeItem: (key: string): Promise<void> =>
-    SecureStore.deleteItemAsync(key),
+
+  removeItem: (key: string): Promise<void> => SecureStore.deleteItemAsync(key),
 };
- 
+
 export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
   auth: {
-    storage:           SecureStoreAdapter,
-    autoRefreshToken:  true,   // Renueva el access_token automáticamente
-    persistSession:    true,   // Persiste la sesión entre reinicios de la app
-    detectSessionInUrl: false, // En React Native NO hay URL; deshabilitar
+    storage: SecureStoreAdapter,
+    autoRefreshToken: true, // Renueva el access_token automáticamente
+    persistSession: true, // Persiste la sesión entre reinicios de la app
+    // Para soportar el flujo OAuth con Expo (AuthSession / WebBrowser),
+    // necesitamos que Supabase pueda extraer la sesión desde la URL
+    // de redirección después del flujo en el navegador. Habilitamos
+    // `detectSessionInUrl` para permitir que `supabase.auth.getSessionFromUrl()`
+    // procese la URL devuelta por `WebBrowser.openAuthSessionAsync`.
+    detectSessionInUrl: true,
   },
 });
