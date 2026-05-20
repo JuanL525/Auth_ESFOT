@@ -6,16 +6,31 @@
   "build": {
     "development": {
       "developmentClient": true,
-      "distribution": "internal"
+      "distribution": "internal",
+      "env": {
+        "EXPO_PUBLIC_SUPABASE_URL": "https://dbwpgrlcroqxlcbzkzfo.supabase.co",
+        "EXPO_PUBLIC_SUPABASE_ANON_KEY": "sb_publishable_okEGCxiuWXEhdTfJyCfR2A_7aJVjfFk",
+        "EXPO_PUBLIC_GOOGLE_WEB_CLIENT_ID": "https://auth-esfot-web-one.vercel.app"
+      }
     },
     "preview": {
       "distribution": "internal",
       "android": {
         "buildType": "apk"
+      },
+      "env": {
+        "EXPO_PUBLIC_SUPABASE_URL": "https://dbwpgrlcroqxlcbzkzfo.supabase.co",
+        "EXPO_PUBLIC_SUPABASE_ANON_KEY": "sb_publishable_okEGCxiuWXEhdTfJyCfR2A_7aJVjfFk",
+        "EXPO_PUBLIC_GOOGLE_WEB_CLIENT_ID": "https://auth-esfot-web-one.vercel.app"
       }
     },
     "production": {
-      "autoIncrement": true
+      "autoIncrement": true,
+      "env": {
+        "EXPO_PUBLIC_SUPABASE_URL": "https://dbwpgrlcroqxlcbzkzfo.supabase.co",
+        "EXPO_PUBLIC_SUPABASE_ANON_KEY": "sb_publishable_okEGCxiuWXEhdTfJyCfR2A_7aJVjfFk",
+        "EXPO_PUBLIC_GOOGLE_WEB_CLIENT_ID": "https://auth-esfot-web-one.vercel.app"
+      }
     }
   },
   "submit": {

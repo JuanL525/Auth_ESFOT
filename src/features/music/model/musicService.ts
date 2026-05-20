@@ -34,7 +34,7 @@ export const uploadSongFile = async (
 ): Promise<string> => {
   const fileName = `${userId}/${normalizeFileName(file.name)}`;
   
-  // SOLUCIÓN DEFINITIVA PARA REACT NATIVE:
+  
   // 1. Leemos el archivo físico y lo convertimos a texto Base64
   const base64 = await FileSystem.readAsStringAsync(file.uri, {
     encoding: 'base64', // <-- Cambiamos esto a un simple string

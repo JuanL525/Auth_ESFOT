@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "AuthESFOT",
-    "slug": "AuthESFOT",
+    "slug": "AuthESFOT-app",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -49,7 +49,7 @@
     "extra": {
       "router": {},
       "eas": {
-        "projectId": "fbdc1662-a5c1-4f1b-8991-f14085d87487"
+        "projectId": "7fbcec11-834b-499b-a7ca-0488814e334f"
       }
     }
   }
