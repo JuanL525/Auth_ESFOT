@@ -1,5 +1,6 @@
 import { Song } from "@/features/music/model/types";
-import { Button, Card, Text, XStack, YStack } from "tamagui";
+import { FontAwesome } from "@expo/vector-icons";
+import { Button, Text, XStack, YStack } from "tamagui";
 
 interface MusicListProps {
   songs: Song[];
@@ -16,76 +17,110 @@ export const MusicList = ({
 }: MusicListProps) => {
   if (!songs.length) {
     return (
-      <Card
+      <YStack
         padding="$4"
-        borderRadius="$6"
-        backgroundColor="#06202a"
-        borderWidth={1}
-        borderColor="#0ea5fa"
-        elevation="$2"
+        borderRadius="$4"
+        backgroundColor="rgba(255, 255, 255, 0.05)"
+        alignItems="center"
+        justifyContent="center"
+        minHeight={120}
       >
-        <Text fontSize={16} fontWeight="700" marginBottom="$2" color="#FFFFFF">
+        <Text fontSize={16} fontWeight="700" marginBottom="$2" color="#F8FAFC">
           No hay canciones aún
         </Text>
-        <Text color="#CFE8F9">
+        <Text color="#94A3B8" textAlign="center">
           Sube tu primera canción para verla en la lista.
         </Text>
-      </Card>
+      </YStack>
     );
   }
 
   return (
     <YStack gap="$3">
       {songs.map((song) => (
-        <Card
+        <XStack
           key={song.id}
-          padding="$4"
-          borderRadius="$6"
-          elevation="$2"
-          backgroundColor="#06202a"
-          borderWidth={1}
-          borderColor="#0ea5fa"
+          backgroundColor="rgba(255, 255, 255, 0.05)"
+          borderRadius="$4"
+          padding="$3"
+          alignItems="center"
+          gap="$3"
+          pressStyle={{
+            scale: 0.98,
+            backgroundColor: "rgba(255, 255, 255, 0.1)",
+          }}
         >
-          <YStack gap="$2">
-            <Text fontSize={16} fontWeight="700" color="#FFFFFF">
+          {/* Carátula de música */}
+          <YStack
+            width={48}
+            height={48}
+            backgroundColor="#1E293B"
+            borderRadius="$2"
+            alignItems="center"
+            justifyContent="center"
+            flexShrink={0}
+          >
+            <FontAwesome name="music" size={24} color="#818CF8" />
+          </YStack>
+
+          {/* Información de la canción */}
+          <YStack flex={1} gap="$1">
+            <Text
+              fontSize={14}
+              fontWeight="600"
+              color="#F8FAFC"
+              numberOfLines={1}
+              ellipsizeMode="tail"
+            >
               {song.title}
             </Text>
-            <Text color="#CFE8F9" numberOfLines={2} ellipsizeMode="tail">
-              {song.lyrics || "Sin letra disponible"}
-            </Text>
-            <XStack
-              justifyContent="space-between"
-              alignItems="center"
-              flexWrap="wrap"
-              gap="$2"
+            <Text
+              fontSize={12}
+              color="#94A3B8"
+              numberOfLines={1}
+              ellipsizeMode="tail"
             >
-              <Button
-                size="$3"
-                onPress={() => onPlay?.(song)}
-                backgroundColor="#0ea5fa"
-                borderWidth={0}
-              >
-                <Text color="#001219" fontWeight="700">
-                  Reproducir
-                </Text>
-              </Button>
-              <XStack gap="$2">
-                <Button
-                  size="$3"
-                  onPress={() => onEdit?.(song)}
-                  backgroundColor="#02121a"
-                  borderWidth={1}
-                  borderColor="#94A3B8"
-                >
-                  <Text color="#FFFFFF">Editar</Text>
-                </Button>
-                <Button size="$3" theme="red" onPress={() => onDelete?.(song)}>
-                  Eliminar
-                </Button>
-              </XStack>
-            </XStack>
+              Canción local
+            </Text>
           </YStack>
-        </Card>
+
+          {/* Botones de acciones */}
+          <XStack gap="$2" alignItems="center" flexShrink={0}>
+            <Button
+              circular
+              size="$2.5"
+              backgroundColor="transparent"
+              borderWidth={0}
+              onPress={() => onPlay?.(song)}
+              icon={<FontAwesome name="play" size={16} color="#94A3B8" />}
+              pressStyle={{
+                backgroundColor: "rgba(129, 140, 248, 0.2)",
+              }}
+            />
+            <Button
+              circular
+              size="$2.5"
+              backgroundColor="transparent"
+              borderWidth={0}
+              onPress={() => onEdit?.(song)}
+              icon={<FontAwesome name="pencil" size={16} color="#94A3B8" />}
+              pressStyle={{
+                backgroundColor: "rgba(129, 140, 248, 0.2)",
+              }}
+            />
+            <Button
+              circular
+              size="$2.5"
+              backgroundColor="transparent"
+              borderWidth={0}
+              onPress={() => onDelete?.(song)}
+              icon={<FontAwesome name="trash" size={16} color="#94A3B8" />}
+              pressStyle={{
+                backgroundColor: "rgba(239, 68, 68, 0.2)",
+              }}
+            />
+          </XStack>
+        </XStack>
       ))}
     </YStack>
   );

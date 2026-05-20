@@ -1,12 +1,13 @@
 import { useMusic } from "@/features/music/model/useMusic";
+import { FontAwesome } from "@expo/vector-icons";
 import {
-    Button,
-    Card,
-    ScrollView,
-    Spinner,
-    Text,
-    XStack,
-    YStack,
+  Button,
+  Card,
+  ScrollView,
+  Spinner,
+  Text,
+  XStack,
+  YStack
 } from "tamagui";
 import { MusicDeleteDialog } from "./MusicDeleteDialog";
 import { MusicList } from "./MusicList";
@@ -45,37 +46,53 @@ export const MusicDashboard = () => {
   } = useMusic();
 
   return (
-    <YStack flex={1} padding="$4">
+    <YStack flex={1} backgroundColor="#0F172A">
       <ScrollView
         flex={1}
-        contentContainerStyle={{ gap: 16, paddingBottom: 32 }}
+        contentContainerStyle={{
+          gap: 16,
+          paddingBottom: 32,
+          paddingHorizontal: 16,
+          paddingTop: 16,
+        }}
       >
-        <XStack
-          justifyContent="space-between"
-          alignItems="center"
-          flexWrap="wrap"
-          gap="$3"
-        >
+        <XStack justifyContent="space-between" alignItems="flex-start" gap="$3">
           <YStack flex={1} gap="$2">
-            <Text fontSize={22} fontWeight="800">
-              Reproductor de música
+            <Text
+              fontSize={12}
+              fontWeight="600"
+              color="#818CF8"
+              textTransform="uppercase"
+              letterSpacing={1}
+            >
+              Tu colección
             </Text>
-            <Text color="#94A3B8" fontSize={13}>
-              Administra tu biblioteca, sube nuevos temas y controla tu
-              colección.
+            <Text fontSize={32} fontWeight="800" color="#F8FAFC">
+              Música
             </Text>
           </YStack>
 
-          <Button onPress={openCreateForm} size="$3">
-            Subir música
-          </Button>
+          <Button
+            circular
+            size="$4"
+            backgroundColor="#6366F1"
+            pressStyle={{ scale: 0.95 }}
+            onPress={openCreateForm}
+            icon={<FontAwesome name="plus" size={20} color="white" />}
+          />
         </XStack>
 
         {isSongsLoading ? (
-          <Card padding="$4" borderRadius="$6" theme="blue">
+          <Card
+            padding="$4"
+            borderRadius="$6"
+            backgroundColor="rgba(99, 102, 241, 0.1)"
+            borderWidth={1}
+            borderColor="#6366F1"
+          >
             <XStack alignItems="center" gap="$2">
               <Spinner size="small" />
-              <Text>Cargando canciones...</Text>
+              <Text color="#F8FAFC">Cargando canciones...</Text>
             </XStack>
           </Card>
         ) : (

@@ -70,7 +70,7 @@ export const MusicUploadSheet = ({
           loop={!showSuccessAnimation}
           style={{ width: 180, height: 180 }}
         />
-        <Text fontSize={18} fontWeight="700">
+        <Text fontSize={18} fontWeight="700" color="#F8FAFC">
           {showSuccessAnimation
             ? isEditing
               ? "Actualizado con éxito"
@@ -98,6 +98,7 @@ export const MusicUploadSheet = ({
     >
       <Sheet.Overlay />
       <Sheet.Frame
+        backgroundColor="#0F172A"
         borderTopLeftRadius="$6"
         borderTopRightRadius="$6"
         padding="$4"
@@ -108,11 +109,17 @@ export const MusicUploadSheet = ({
             renderAnimation()
           ) : (
             <>
-              <Text fontSize={18} fontWeight="700">
+              <Text fontSize={18} fontWeight="700" color="#F8FAFC">
                 {isEditing ? "Editar canción" : "Subir nueva canción"}
               </Text>
 
-              <Text fontSize={13} color="#FFFFFF" fontWeight="700">
+              <Text
+                fontSize={12}
+                color="#818CF8"
+                fontWeight="700"
+                textTransform="uppercase"
+                letterSpacing={1}
+              >
                 Título
               </Text>
               <Input
@@ -120,14 +127,26 @@ export const MusicUploadSheet = ({
                 onChangeText={onTitleChange}
                 placeholder="Escribe el título aquí"
                 size="$4"
-                // make input light so text is readable against dark sheet
-                backgroundColor="#FFFFFF"
-                color="#000000"
-                borderRadius={8}
+                backgroundColor="rgba(255,255,255,0.05)"
+                color="#F8FAFC"
+                placeholderTextColor={"#64748B" as any}
+                borderWidth={1}
+                borderColor="rgba(255,255,255,0.1)"
+                borderRadius="$3"
                 padding="$3"
+                focusStyle={{
+                  borderColor: "#6366f1",
+                  backgroundColor: "rgba(255,255,255,0.1)",
+                }}
               />
 
-              <Text fontSize={13} color="#FFFFFF" fontWeight="700">
+              <Text
+                fontSize={12}
+                color="#818CF8"
+                fontWeight="700"
+                textTransform="uppercase"
+                letterSpacing={1}
+              >
                 Letras (opcional)
               </Text>
               <TextArea
@@ -135,42 +154,66 @@ export const MusicUploadSheet = ({
                 onChangeText={onLyricsChange}
                 placeholder="Añade las letras aquí (opcional)"
                 minHeight={120}
-                backgroundColor="#FFFFFF"
-                color="#000000"
-                borderRadius={8}
+                backgroundColor="rgba(255,255,255,0.05)"
+                color="#F8FAFC"
+                placeholderTextColor={"#64748B" as any}
+                borderWidth={1}
+                borderColor="rgba(255,255,255,0.1)"
+                borderRadius="$3"
                 padding="$3"
+                focusStyle={{
+                  borderColor: "#6366f1",
+                  backgroundColor: "rgba(255,255,255,0.1)",
+                }}
               />
 
               <Card
                 borderRadius="$5"
                 padding="$3"
-                // give the card a subtle colored border and darker background to stand out
-                backgroundColor="#06202a"
+                backgroundColor="rgba(15,23,42,0.5)"
                 borderWidth={1}
-                borderColor="#0ea5fa"
-                elevation="$4"
+                borderColor="rgba(255,255,255,0.05)"
+                elevation="$2"
               >
-                <Text color="#FFFFFF" fontWeight="700">
+                <Text color="#F8FAFC" fontWeight="700">
                   {isEditing ? "Archivo actual:" : "Archivo seleccionado:"}
                 </Text>
-                <Text marginTop="$2" color="#FFFFFF">
+                <Text marginTop="$2" color="#F8FAFC">
                   {selectedFile?.name ||
                     currentFilePath ||
                     "Ningún archivo seleccionado"}
                 </Text>
-                <Button size="$3" onPress={pickAudioFile} marginTop="$3">
-                  {isEditing ? "Cambiar archivo" : "Elegir archivo"}
+                <Button
+                  size="$3"
+                  onPress={pickAudioFile}
+                  marginTop="$3"
+                  backgroundColor="rgba(255,255,255,0.05)"
+                  borderWidth={1}
+                  borderColor="rgba(255,255,255,0.08)"
+                >
+                  <Text color="#F8FAFC">
+                    {isEditing ? "Cambiar archivo" : "Elegir archivo"}
+                  </Text>
                 </Button>
               </Card>
 
-              <Button onPress={onSubmit} disabled={uploading} size="$4">
-                {uploading
-                  ? isEditing
-                    ? "Actualizando…"
-                    : "Subiendo…"
-                  : isEditing
-                    ? "Actualizar canción"
-                    : "Guardar canción"}
+              <Button
+                onPress={onSubmit}
+                disabled={uploading}
+                size="$4"
+                backgroundColor="#6366f1"
+                pressStyle={{ scale: 0.98, backgroundColor: "#4f46e5" }}
+                borderWidth={0}
+              >
+                <Text color="#F8FAFC" fontWeight="800">
+                  {uploading
+                    ? isEditing
+                      ? "Actualizando…"
+                      : "Subiendo…"
+                    : isEditing
+                      ? "Actualizar canción"
+                      : "Guardar canción"}
+                </Text>
               </Button>
             </>
           )}
