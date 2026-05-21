@@ -74,7 +74,7 @@ export const MusicPlayerSheet = ({
 
   // Simulación de la barra de progreso
   useEffect(() => {
-    let interval: NodeJS.Timeout;
+    let interval: ReturnType<typeof setInterval>;
     if (isPlaying && open) {
       interval = setInterval(() => {
         setProgress((prev) => (prev >= 100 ? 0 : prev + 0.5));
